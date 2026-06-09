@@ -46,3 +46,16 @@ plt.title('Frequency spectrum')
 plt.show()
 
 
+# artifact found by looking at the spectrum image
+# raw x,y coordinates from the plot (x = col, y = row):
+# (372.8, 35.1), (294.0, 123.0), (62.8, 384.8), (140.4, 295.8)
+
+# the spectrum was shifted so zero frequency is in the center at (209, 209)
+# so we subtract the center from each point to get the distance from center
+# format: (row offset, col offset)
+artifact_points = [
+    (-174,  164),   # row = 35  - 209, col = 372 - 209
+    ( -86,   85),   # row = 123 - 209, col = 294 - 209
+    ( 176, -146),  # row = 385 - 209, col = 63  - 209
+    (  87,  -69),  # row = 296 - 209, col = 140 - 209
+]
