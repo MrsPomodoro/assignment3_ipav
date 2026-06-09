@@ -31,8 +31,18 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-image = cv2.imread('data/MRI_scan_with_artifact.png').astype(np.float32)
+image = cv2.imread('data/MRI_scan_with_artifact.png', cv2.IMREAD_GRAYSCALE).astype(np.float32)
 
 # FFT – convert to frequency domain
-imageefft = np.fft.fft2(image)
-img_ft_shifted = np.fft.fftshift(imageefft)      # shift zero frequency to center
+imagefft = np.fft.fft2(image)
+
+imagefft_shifted = np.fft.fftshift(imagefft)      # shift zero frequency to center
+
+# show the magnitude spectrum to manually identify artifact frequencies based on  example16
+img_magnitude = np.log(1 + np.abs(imagefft_shifted))
+
+plt.imshow(np.log(img_magnitude+1), cmap='gray') 
+plt.title('Frequency spectrum')
+plt.show()
+
+
